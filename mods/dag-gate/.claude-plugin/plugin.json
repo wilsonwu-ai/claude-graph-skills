@@ -1,0 +1,9 @@
+{
+  "name": "dag-gate",
+  "version": "0.1.0",
+  "description": "The person's side of the /dag skill: /dag-approve writes a digest-bound approval the dag.py runner accepts (only when the person types it), /dag-pending, /dag-revoke, /dag-stop, /dag-resume; and a guard that denies the model's writes into .dag folders, edits to the frozen dag skill and this mod, and dag.py approve or resume (Bash, Write, Edit, subagents too).",
+  "types": "./types/index.d.ts",
+  "author": {
+    "name": "wilsonwu-ai"
+  }
+}

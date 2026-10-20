@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 500" width="960" height="500" role="img" aria-labelledby="t d">
+  <title id="t">The fake edge test: a typed chain versus the real graph</title>
+  <desc id="d">On the left, five steps typed as a chain, with two arrows marked fake because the next step does not read the previous step's output. On the right, the same steps as a graph: three reads side by side, then combine, then write report, with only real edges.</desc>
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#17212a"/></marker>
+    <marker id="arf" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#b3261e"/></marker>
+    <marker id="arg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#2a62c4"/></marker>
+  </defs>
+  <style>
+    text { font-family: "Atkinson Hyperlegible", Helvetica, Arial, sans-serif; fill: #17212a; font-size: 20px; }
+    .h { font-size: 24px; font-weight: 700; }
+    .muted { fill: #586672; }
+    .fake { fill: #b3261e; font-weight: 700; font-size: 18px; }
+    .box { fill: #eaf0fb; stroke: #2a62c4; stroke-width: 2.5; }
+    .real { stroke: #17212a; stroke-width: 3; fill: none; }
+    .gedge { stroke: #2a62c4; stroke-width: 3; fill: none; }
+    .fk { stroke: #b3261e; stroke-width: 3; stroke-dasharray: 7 6; fill: none; }
+    .fx { stroke: #b3261e; stroke-width: 4; stroke-linecap: round; }
+    @media (prefers-reduced-motion: no-preference) {
+      .fadeout { animation: fade 6s ease-in-out infinite; }
+    }
+    @keyframes fade {
+      0%, 25% { opacity: 1; }
+      50%, 80% { opacity: 0.12; }
+      100% { opacity: 1; }
+    }
+  </style>
+  <rect x="1" y="1" width="958" height="498" rx="18" fill="#ffffff" stroke="#d6dde2" stroke-width="2"/>
+  <line x1="480" y1="30" x2="480" y2="410" stroke="#d6dde2" stroke-width="2"/>
+
+  <!-- left: as typed -->
+  <text x="240" y="48" text-anchor="middle" class="h">As typed</text>
+  <rect class="box" x="140" y="78" width="200" height="42" rx="8"/><text x="240" y="106" text-anchor="middle">1 read file A</text>
+  <rect class="box" x="140" y="150" width="200" height="42" rx="8"/><text x="240" y="178" text-anchor="middle">2 read file B</text>
+  <rect class="box" x="140" y="222" width="200" height="42" rx="8"/><text x="240" y="250" text-anchor="middle">3 read file C</text>
+  <rect class="box" x="140" y="294" width="200" height="42" rx="8"/><text x="240" y="322" text-anchor="middle">4 combine notes</text>
+  <rect class="box" x="140" y="366" width="200" height="42" rx="8"/><text x="240" y="394" text-anchor="middle">5 write report</text>
+  <g class="fadeout">
+    <path class="fk" d="M240 120 V148" marker-end="url(#arf)"/>
+    <path class="fx" d="M233 127 L247 141 M247 127 L233 141"/>
+    <text x="262" y="141" class="fake">FAKE</text>
+    <path class="fk" d="M240 192 V220" marker-end="url(#arf)"/>
+    <path class="fx" d="M233 199 L247 213 M247 199 L233 213"/>
+    <text x="262" y="213" class="fake">FAKE</text>
+  </g>
+  <path class="real" d="M240 264 V292" marker-end="url(#ar)"/>
+  <path class="real" d="M240 336 V364" marker-end="url(#ar)"/>
+
+  <!-- right: as a graph -->
+  <text x="715" y="48" text-anchor="middle" class="h">As a graph</text>
+  <rect class="box" x="500" y="100" width="130" height="42" rx="8"/><text x="565" y="128" text-anchor="middle">read file A</text>
+  <rect class="box" x="650" y="100" width="130" height="42" rx="8"/><text x="715" y="128" text-anchor="middle">read file B</text>
+  <rect class="box" x="800" y="100" width="130" height="42" rx="8"/><text x="865" y="128" text-anchor="middle">read file C</text>
+  <path class="gedge" d="M565 142 L690 222" marker-end="url(#arg)"/>
+  <path class="gedge" d="M715 142 V220" marker-end="url(#arg)"/>
+  <path class="gedge" d="M865 142 L740 222" marker-end="url(#arg)"/>
+  <rect class="box" x="625" y="224" width="180" height="42" rx="8"/><text x="715" y="252" text-anchor="middle">combine notes</text>
+  <path class="gedge" d="M715 266 V320" marker-end="url(#arg)"/>
+  <rect class="box" x="625" y="322" width="180" height="42" rx="8"/><text x="715" y="350" text-anchor="middle">write report</text>
+  <text x="715" y="396" text-anchor="middle" class="muted">three reads run side by side</text>
+
+  <text x="480" y="448" text-anchor="middle" style="font-size:24px;font-weight:700">Does the next step read the previous step's output?</text>
+  <text x="480" y="480" text-anchor="middle" class="muted">If not, the arrow is fake and the wait buys nothing.</text>
+</svg>

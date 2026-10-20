@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 560" width="960" height="560" role="img" aria-labelledby="t d">
+  <title id="t">How a bakeoff runs: one frozen plan, two builders, a blind judge</title>
+  <desc id="d">One frozen plan and acceptance file go to two branches: arm A, the champion, and arm B, the challenger, which can be any second builder. Both outputs are relabelled X and Y. A blind judge scores twice with the labels swapped. The result goes on a scorecard. After three runs the test shows direction, then retires.</desc>
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#a36a12"/></marker>
+    <path id="pa" d="M200 220 L240 120 H460 H520 H640 L690 215"/>
+    <path id="pb" d="M200 260 L240 360 H460 H520 H640 L690 245"/>
+  </defs>
+  <style>
+    text { font-family: "Atkinson Hyperlegible", Helvetica, Arial, sans-serif; fill: #17212a; font-size: 20px; }
+    .h { font-size: 26px; font-weight: 700; }
+    .muted { fill: #586672; font-size: 18px; }
+    .box { fill: #fbf3e3; stroke: #a36a12; stroke-width: 2.5; }
+    .frozen { fill: #f1e2c0; stroke: #a36a12; stroke-width: 3; }
+    .e { fill: none; stroke: #a36a12; stroke-width: 3; }
+    .pulse { fill: #a36a12; }
+    @media (prefers-reduced-motion: reduce) { .pulse { display: none; } }
+  </style>
+  <rect x="1" y="1" width="958" height="558" rx="18" fill="#ffffff" stroke="#d6dde2" stroke-width="2"/>
+  <text x="40" y="46" class="h">One frozen plan, two builders, one blind judge</text>
+
+  <!-- edges -->
+  <path class="e" d="M200 220 L240 120" marker-end="url(#ar)"/>
+  <path class="e" d="M200 260 L240 360" marker-end="url(#ar)"/>
+  <path class="e" d="M460 120 H518" marker-end="url(#ar)"/>
+  <path class="e" d="M460 360 H518" marker-end="url(#ar)"/>
+  <path class="e" d="M640 120 L688 212" marker-end="url(#ar)"/>
+  <path class="e" d="M640 360 L688 248" marker-end="url(#ar)"/>
+  <path class="e" d="M810 270 V328" marker-end="url(#ar)"/>
+  <path class="e" d="M810 388 V448" marker-end="url(#ar)"/>
+
+  <!-- plan -->
+  <rect class="frozen" x="30" y="170" width="170" height="120" rx="12"/>
+  <text x="115" y="204" text-anchor="middle" style="font-weight:700">frozen plan</text>
+  <text x="115" y="230" text-anchor="middle">+ acceptance</text>
+  <text x="115" y="262" text-anchor="middle" class="muted">same for both</text>
+
+  <!-- arms -->
+  <rect class="box" x="240" y="80" width="220" height="80" rx="12"/>
+  <text x="350" y="114" text-anchor="middle" style="font-weight:700">Arm A: champion</text>
+  <text x="350" y="141" text-anchor="middle" class="muted">the current default</text>
+  <rect class="box" x="240" y="316" width="220" height="88" rx="12"/>
+  <text x="350" y="350" text-anchor="middle" style="font-weight:700">Arm B: challenger</text>
+  <text x="350" y="377" text-anchor="middle" class="muted">any second builder</text>
+
+  <!-- outputs -->
+  <rect class="box" x="520" y="90" width="120" height="60" rx="10"/>
+  <text x="580" y="126" text-anchor="middle">output X</text>
+  <rect class="box" x="520" y="330" width="120" height="60" rx="10"/>
+  <text x="580" y="366" text-anchor="middle">output Y</text>
+  <text x="580" y="186" text-anchor="middle" class="muted">relabelled</text>
+  <text x="580" y="310" text-anchor="middle" class="muted">relabelled</text>
+
+  <!-- judge -->
+  <rect class="box" x="690" y="170" width="240" height="100" rx="12"/>
+  <text x="810" y="204" text-anchor="middle" style="font-weight:700">blind judge</text>
+  <text x="810" y="230" text-anchor="middle">scores twice,</text>
+  <text x="810" y="254" text-anchor="middle">labels swapped</text>
+
+  <!-- scorecard -->
+  <rect class="box" x="690" y="330" width="240" height="58" rx="12"/>
+  <text x="810" y="367" text-anchor="middle" style="font-weight:700">scorecard</text>
+
+  <!-- verdict banner -->
+  <rect class="frozen" x="30" y="450" width="900" height="64" rx="12"/>
+  <text x="480" y="490" text-anchor="middle" style="font-weight:700;font-size:22px">after 3 runs: direction, then retire</text>
+
+  <!-- pulses -->
+  <circle class="pulse" r="9"><animateMotion dur="5s" repeatCount="indefinite" begin="0s"><mpath href="#pa"/></animateMotion></circle>
+  <circle class="pulse" r="9"><animateMotion dur="5s" repeatCount="indefinite" begin="0s"><mpath href="#pb"/></animateMotion></circle>
+</svg>

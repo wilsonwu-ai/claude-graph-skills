@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 520" width="960" height="520" role="img" aria-labelledby="t d">
+  <title id="t">How a dag job stops at a gate and releases an effect once</title>
+  <desc id="d">A dag.json spec is run. The nodes are two commands, a gate and an effect. The run stops with exit 2: waiting for a person. The person types /dag-approve review f94adb. A digest check compares the reviewed files and the effect. The effect then runs once, and a hash-chained receipt is written. Editing a reviewed file makes the approval stale.</desc>
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#1f7a5e"/></marker>
+    <path id="p1" d="M95 135 H760"/>
+    <path id="p2" d="M830 175 V225 H180 V303 H855"/>
+  </defs>
+  <style>
+    text { font-family: "Atkinson Hyperlegible", Helvetica, Arial, sans-serif; fill: #17212a; font-size: 20px; }
+    .mono { font-family: "JetBrains Mono", Menlo, Consolas, monospace; font-size: 17px; }
+    .h { font-size: 26px; font-weight: 700; }
+    .muted { fill: #586672; font-size: 18px; }
+    .box { fill: #e3f2ed; stroke: #1f7a5e; stroke-width: 2.5; }
+    .stop { fill: #fdecea; stroke: #b3261e; stroke-width: 2.5; }
+    .e { fill: none; stroke: #1f7a5e; stroke-width: 3; }
+    .shackle { fill: none; stroke: #1f7a5e; stroke-width: 4; stroke-linecap: round; transform: translateY(-8px); }
+    .tok { fill: #1f7a5e; opacity: 0; }
+    .tok2 { fill: #1f7a5e; opacity: 0; }
+    @media (prefers-reduced-motion: no-preference) {
+      .tok { animation: t1 12s linear infinite; }
+      .tok2 { animation: t2 12s linear infinite; }
+      .shackle { animation: unlock 12s infinite; }
+    }
+    @media (prefers-reduced-motion: reduce) { .tok, .tok2 { display: none; } }
+    @keyframes t1 { 0%, 2% { opacity: 0; } 4%, 40% { opacity: 1; } 44%, 100% { opacity: 0; } }
+    @keyframes t2 { 0%, 49% { opacity: 0; } 52%, 90% { opacity: 1; } 94%, 100% { opacity: 0; } }
+    @keyframes unlock { 0%, 58% { transform: translateY(0); } 62%, 96% { transform: translateY(-8px); } 100% { transform: translateY(0); } }
+  </style>
+  <rect x="1" y="1" width="958" height="518" rx="18" fill="#ffffff" stroke="#d6dde2" stroke-width="2"/>
+  <text x="40" y="44" class="h">A job stops at the gate until a person approves</text>
+
+  <!-- row 1 -->
+  <rect class="box" x="30" y="100" width="130" height="70" rx="10"/>
+  <text x="95" y="143" text-anchor="middle" class="mono">dag.json</text>
+  <path class="e" d="M160 135 H196" marker-end="url(#ar)"/>
+  <rect class="box" x="200" y="100" width="90" height="70" rx="10"/>
+  <text x="245" y="143" text-anchor="middle">run</text>
+  <path class="e" d="M290 135 H322" marker-end="url(#ar)"/>
+  <rect x="326" y="66" width="378" height="116" rx="12" fill="none" stroke="#d6dde2" stroke-width="2" stroke-dasharray="6 5"/>
+  <text x="515" y="90" text-anchor="middle" class="muted">nodes</text>
+  <rect class="box" x="334" y="100" width="80" height="70" rx="8"/><text x="374" y="143" text-anchor="middle">cmd</text>
+  <rect class="box" x="424" y="100" width="80" height="70" rx="8"/><text x="464" y="143" text-anchor="middle">cmd</text>
+  <rect class="box" x="514" y="100" width="80" height="70" rx="8"/><text x="554" y="122" text-anchor="middle">gate</text>
+  <path class="shackle" d="M547 152 V146 a7 7 0 0 1 14 0 V152"/>
+  <rect x="544" y="152" width="20" height="14" rx="3" fill="#1f7a5e"/>
+  <rect class="box" x="604" y="100" width="92" height="70" rx="8"/><text x="650" y="143" text-anchor="middle">effect</text>
+  <path class="e" d="M704 135 H726" marker-end="url(#ar)"/>
+  <rect class="stop" x="730" y="100" width="200" height="75" rx="10"/>
+  <text x="830" y="130" text-anchor="middle" style="font-weight:700">exit 2:</text>
+  <text x="830" y="156" text-anchor="middle">waiting for a person</text>
+
+  <!-- connector down -->
+  <path class="e" d="M830 175 V225 H180 V258" marker-end="url(#ar)" stroke-dasharray="6 5"/>
+  <text x="500" y="217" text-anchor="middle" class="muted">the person reads the reviewed files, then</text>
+
+  <!-- row 2 -->
+  <rect class="box" x="30" y="262" width="300" height="84" rx="10"/>
+  <text x="180" y="296" text-anchor="middle">person types</text>
+  <text x="180" y="326" text-anchor="middle" class="mono">/dag-approve review f94adb</text>
+  <path class="e" d="M330 304 H356" marker-end="url(#ar)"/>
+  <rect class="box" x="360" y="262" width="220" height="84" rx="10"/>
+  <text x="470" y="292" text-anchor="middle" style="font-weight:700">digest check</text>
+  <text x="470" y="316" text-anchor="middle" class="muted">sha256 of the files</text>
+  <text x="470" y="337" text-anchor="middle" class="muted">and of the effect</text>
+  <path class="e" d="M580 304 H606" marker-end="url(#ar)"/>
+  <rect class="box" x="610" y="262" width="140" height="84" rx="10"/>
+  <text x="680" y="298" text-anchor="middle">effect runs</text>
+  <text x="680" y="324" text-anchor="middle">once</text>
+  <path class="e" d="M750 304 H776" marker-end="url(#ar)"/>
+  <rect class="box" x="780" y="262" width="150" height="84" rx="10"/>
+  <text x="855" y="298" text-anchor="middle">hash-chained</text>
+  <text x="855" y="324" text-anchor="middle">receipt</text>
+
+  <!-- annotations -->
+  <path d="M470 346 V382" stroke="#b3261e" stroke-width="2.5" stroke-dasharray="5 4" fill="none"/>
+  <text x="470" y="412" text-anchor="middle" style="fill:#b3261e;font-weight:700;font-size:22px">edit a reviewed file = approval goes stale</text>
+  <text x="480" y="462" text-anchor="middle" class="muted">The hex is the start of the digest, so the approval covers exactly that content, once.</text>
+  <text x="480" y="490" text-anchor="middle" class="muted">Only the person can type the approval. The model cannot.</text>
+
+  <!-- tokens -->
+  <circle class="tok" r="9"><animateMotion dur="12s" repeatCount="indefinite" keyPoints="0;1;1" keyTimes="0;0.38;1" calcMode="linear"><mpath href="#p1"/></animateMotion></circle>
+  <circle class="tok2" r="9"><animateMotion dur="12s" repeatCount="indefinite" keyPoints="0;0;1;1" keyTimes="0;0.5;0.9;1" calcMode="linear"><mpath href="#p2"/></animateMotion></circle>
+</svg>

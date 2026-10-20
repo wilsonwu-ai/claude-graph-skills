@@ -1,0 +1,121 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 400" width="960" height="400" role="img" aria-labelledby="t d">
+  <title id="t">One job splits into four lanes, merges, and waits at a locked gate</title>
+  <desc id="d">A job card splits into four parallel lanes. The lanes merge into a verify diamond. The result reaches a padlock gate. The lock opens only after a /dag-approve chip appears, and then the work is shipped.</desc>
+  <style>
+    text { font-family: "Atkinson Hyperlegible", Helvetica, Arial, sans-serif; fill: #17212a; font-size: 20px; }
+    .mono { font-family: "JetBrains Mono", Menlo, Consolas, monospace; font-size: 18px; }
+    .muted { fill: #586672; font-size: 18px; }
+    .title { font-size: 26px; font-weight: 700; }
+    .line { fill: none; stroke: #2a62c4; stroke-width: 3; }
+    .gline { fill: none; stroke: #1f7a5e; stroke-width: 3; }
+    .shackle { fill: none; stroke: #1f7a5e; stroke-width: 6; stroke-linecap: round; transform: translateY(-14px); }
+    .dot { fill: #2a62c4; opacity: 0; }
+    .mdot { fill: #1f7a5e; opacity: 0; }
+    @media (prefers-reduced-motion: no-preference) {
+      .dot, .mdot { animation-duration: 8s; animation-iteration-count: infinite; animation-timing-function: linear; }
+      .l1 { --dy: -100px; animation-name: lane; }
+      .l2 { --dy: -40px; animation-name: lane; }
+      .l3 { --dy: 40px; animation-name: lane; }
+      .l4 { --dy: 100px; animation-name: lane; }
+      .mdot { animation-name: merged; }
+      .shackle { animation: unlock 8s infinite; }
+      .chip { animation: chip 8s infinite; }
+      .ship { animation: ship 8s infinite; }
+    }
+    @keyframes lane {
+      0%, 5% { opacity: 0; transform: translate(0, 0); }
+      7% { opacity: 1; transform: translate(0, 0); }
+      15% { transform: translate(50px, var(--dy)); }
+      19% { transform: translate(100px, var(--dy)); }
+      35% { transform: translate(260px, var(--dy)); }
+      39% { transform: translate(310px, var(--dy)); }
+      44% { opacity: 1; transform: translate(360px, 0); }
+      48%, 100% { opacity: 0; transform: translate(400px, 0); }
+    }
+    @keyframes merged {
+      0%, 46% { opacity: 0; transform: translate(0, 0); }
+      48% { opacity: 1; transform: translate(0, 0); }
+      58% { opacity: 1; transform: translate(128px, 0); }
+      78% { opacity: 1; transform: translate(128px, 0); }
+      90% { opacity: 1; transform: translate(320px, 0); }
+      94%, 100% { opacity: 0; transform: translate(320px, 0); }
+    }
+    @keyframes unlock {
+      0%, 76% { transform: translateY(0); }
+      80%, 96% { transform: translateY(-14px); }
+      100% { transform: translateY(0); }
+    }
+    @keyframes chip {
+      0%, 68% { opacity: 0; }
+      72%, 96% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+    @keyframes ship {
+      0%, 88% { opacity: 0; }
+      91%, 96% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+  </style>
+  <rect x="1" y="1" width="958" height="398" rx="18" fill="#ffffff" stroke="#d6dde2" stroke-width="2"/>
+  <text x="40" y="46" class="title">One job, four lanes, one locked gate</text>
+
+  <!-- job card -->
+  <rect x="40" y="170" width="120" height="60" rx="10" fill="#eaf0fb" stroke="#2a62c4" stroke-width="2.5"/>
+  <text x="100" y="206" text-anchor="middle">one job</text>
+
+  <!-- lanes -->
+  <path class="line" d="M160 200 L210 100 L260 100"/>
+  <path class="line" d="M160 200 L210 160 L260 160"/>
+  <path class="line" d="M160 200 L210 240 L260 240"/>
+  <path class="line" d="M160 200 L210 300 L260 300"/>
+  <path class="line" d="M420 100 L470 100 L520 200"/>
+  <path class="line" d="M420 160 L470 160 L520 200"/>
+  <path class="line" d="M420 240 L470 240 L520 200"/>
+  <path class="line" d="M420 300 L470 300 L520 200"/>
+  <g fill="#eaf0fb" stroke="#2a62c4" stroke-width="2.5">
+    <rect x="260" y="80" width="160" height="40" rx="8"/>
+    <rect x="260" y="140" width="160" height="40" rx="8"/>
+    <rect x="260" y="220" width="160" height="40" rx="8"/>
+    <rect x="260" y="280" width="160" height="40" rx="8"/>
+  </g>
+  <text x="340" y="107" text-anchor="middle">lane 1</text>
+  <text x="340" y="167" text-anchor="middle">lane 2</text>
+  <text x="340" y="247" text-anchor="middle">lane 3</text>
+  <text x="340" y="307" text-anchor="middle">lane 4</text>
+
+  <!-- verify -->
+  <path d="M560 160 L600 200 L560 240 L520 200 Z" fill="#eaf0fb" stroke="#2a62c4" stroke-width="2.5"/>
+  <text x="560" y="272" text-anchor="middle" class="muted">verify</text>
+
+  <!-- to gate and ship -->
+  <path class="gline" d="M600 200 L695 200"/>
+  <path class="gline" d="M745 200 L846 200"/>
+
+  <!-- padlock gate -->
+  <path class="shackle" d="M705 175 V160 a15 15 0 0 1 30 0 V175"/>
+  <rect x="695" y="175" width="50" height="50" rx="8" fill="#e3f2ed" stroke="#1f7a5e" stroke-width="3"/>
+  <circle cx="720" cy="196" r="5" fill="#1f7a5e"/>
+  <rect x="718" y="198" width="4" height="14" fill="#1f7a5e"/>
+  <text x="720" y="258" text-anchor="middle" class="muted">gate</text>
+  <text x="720" y="296" text-anchor="middle" class="muted">opens only on approval</text>
+
+  <!-- approve chip -->
+  <g class="chip">
+    <rect x="632" y="92" width="176" height="36" rx="18" fill="#1f7a5e"/>
+    <text x="720" y="116" text-anchor="middle" class="mono" style="fill:#ffffff">/dag-approve</text>
+  </g>
+
+  <!-- shipped -->
+  <g class="ship">
+    <circle cx="880" cy="200" r="34" fill="#1f7a5e"/>
+    <path d="M863 201 L875 213 L898 188" fill="none" stroke="#ffffff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <text x="880" y="262" text-anchor="middle" class="muted">shipped</text>
+
+  <!-- moving dots -->
+  <circle class="dot l1" cx="160" cy="200" r="8"/>
+  <circle class="dot l2" cx="160" cy="200" r="8"/>
+  <circle class="dot l3" cx="160" cy="200" r="8"/>
+  <circle class="dot l4" cx="160" cy="200" r="8"/>
+  <circle class="mdot" cx="560" cy="200" r="9"/>
+</svg>

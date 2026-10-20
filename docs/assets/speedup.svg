@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540" role="img" aria-labelledby="t d">
+  <title id="t">Realistic speedup from running agents in parallel</title>
+  <desc id="d">Line chart of S = 1 / ((1 - p) + p / N) for 1 to 32 agents. Three curves for p = 0.5, 0.7 and 0.95 flatten toward dashed ceilings of 2x, 3.3x and 20x. At 16 agents the speedups are about 1.9x, 2.9x and 9.1x.</desc>
+  <style>
+    text { font-family: "Atkinson Hyperlegible", Helvetica, Arial, sans-serif; fill: #17212a; font-size: 18px; }
+    .h { font-size: 24px; font-weight: 700; }
+    .muted { fill: #586672; }
+    .axis { stroke: #586672; stroke-width: 2; }
+    .grid { stroke: #d6dde2; stroke-width: 1.5; }
+    .ceil { stroke: #586672; stroke-width: 2; stroke-dasharray: 8 6; }
+    .c95 { fill: none; stroke: #2a62c4; stroke-width: 4; stroke-linejoin: round; stroke-linecap: round; }
+    .c70 { fill: none; stroke: #1f7a5e; stroke-width: 4; stroke-linejoin: round; stroke-linecap: round; }
+    .c50 { fill: none; stroke: #a36a12; stroke-width: 4; stroke-linejoin: round; stroke-linecap: round; }
+    @media (prefers-reduced-motion: no-preference) {
+      .c95, .c70, .c50 { stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw 2.4s ease-out forwards; }
+      .c70 { animation-delay: 0.5s; }
+      .c50 { animation-delay: 1s; }
+      .lab { opacity: 0; animation: show 0.6s ease-out forwards; animation-delay: 2.6s; }
+    }
+    @keyframes draw { to { stroke-dashoffset: 0; } }
+    @keyframes show { to { opacity: 1; } }
+  </style>
+  <rect x="1" y="1" width="958" height="538" rx="18" fill="#ffffff" stroke="#d6dde2" stroke-width="2"/>
+  <text x="40" y="44" class="h">Speedup = 1 / ((1 - p) + p / N)</text>
+  <text x="40" y="70" class="muted">p is the share of the job that can run in parallel</text>
+
+  <!-- grid and y ticks -->
+  <g class="grid">
+    <line x1="110" y1="345" x2="760" y2="345"/>
+    <line x1="110" y1="250" x2="760" y2="250"/>
+    <line x1="110" y1="155" x2="760" y2="155"/>
+  </g>
+  <line class="axis" x1="110" y1="440" x2="760" y2="440"/>
+  <line class="axis" x1="110" y1="100" x2="110" y2="440"/>
+  <g text-anchor="end" class="muted">
+    <text x="98" y="446">1x</text>
+    <text x="98" y="351">5x</text>
+    <text x="98" y="256">10x</text>
+    <text x="98" y="161">15x</text>
+  </g>
+  <g text-anchor="middle" class="muted">
+    <text x="110" y="468">1</text>
+    <text x="257" y="468">8</text>
+    <text x="424" y="468">16</text>
+    <text x="592" y="468">24</text>
+    <text x="760" y="468">32</text>
+  </g>
+  <text x="435" y="508" text-anchor="middle">agents in parallel (N)</text>
+  <text transform="translate(34 270) rotate(-90)" text-anchor="middle">realistic speedup</text>
+
+  <!-- ceilings: y = 440 - 19 * ceiling -->
+  <line class="ceil" x1="110" y1="100" x2="760" y2="100"/>
+  <line class="ceil" x1="110" y1="377" x2="760" y2="377"/>
+  <line class="ceil" x1="110" y1="402" x2="760" y2="402"/>
+  <text x="772" y="106" class="muted">ceiling 20x</text>
+  <text x="772" y="372" class="muted">ceiling 3.3x</text>
+  <text x="772" y="414" class="muted">ceiling 2x</text>
+
+  <!-- curves, N = 1,2,3,4,6,8,12,16,24,32 -->
+  <polyline class="c95" pathLength="1" points="110,421 131,403.8 152,388.2 173,373.9 215,348.8 257,327.4 341,292.9 424.5,266.3 592,227.9 760,201.6"/>
+  <polyline class="c70" pathLength="1" points="110,421 131,410.8 152,404.4 173,400 215,394.4 257,391 341,387 424.5,384.7 592,382.3 760,381"/>
+  <polyline class="c50" pathLength="1" points="110,421 131,414.7 152,411.5 173,409.6 215,407.4 257,406.2 341,404.9 424.5,404.2 592,403.5 760,403.2"/>
+
+  <!-- direct labels -->
+  <g class="lab">
+    <text x="560" y="206" style="fill:#2a62c4;font-weight:700">p = 0.95</text>
+    <text x="560" y="352" style="fill:#1f7a5e;font-weight:700">p = 0.7</text>
+    <path d="M610 360 L602 378" stroke="#1f7a5e" stroke-width="2" fill="none"/>
+    <text x="470" y="432" style="fill:#a36a12;font-weight:700">p = 0.5</text>
+    <circle cx="424.5" cy="266.3" r="6" fill="#2a62c4"/>
+    <text x="436" y="292" class="muted">16 agents: 9.1x</text>
+  </g>
+</svg>
