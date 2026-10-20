@@ -78,7 +78,11 @@ FAN OUT:     <what splits, how many, why they're independent>
 CONTRACT:    <the exact field shape every node returns>
 ANCHOR:      <the ground truth the verifier reads: a test that ran, a filing, cash that
               landed, a spec sheet. If you cannot name one, say so explicitly: the verify
-              step is then an echo, and the finding ships labelled unverified.>
+              step is then an echo, and the finding ships labelled unverified.
+              If the anchor can only run OUTSIDE this session (a guard, hook or permission
+              blocks it, or it needs the person's machine, login or device), say so here and
+              put the exact command in the plan, before go. Found at close-out, it ships
+              unverified.>
 VERIFY:      <independent skeptic(s); distinct lenses if it can be wrong in more than one way.
               Verifier sees the FINDING only, never the worker's reasoning.>
 REDUCE:      <flatten / dedupe key / rank, in plain code, no agent>
@@ -125,6 +129,8 @@ Non-negotiable. Show:
 
 - **Routing, if the items are uneven.** When most items are easy and a few are hard, add a router: every item starts on the cheap tier, and only items that trip a signal escalate. Name the signal, and prefer a deterministic one (a test failed, the diff touches more than one file, the schema returned `uncertain`) over a model's self-reported confidence, which is not calibrated. The router decides **where** an item goes. It never decides whether the item is **true**. That stays with the verifier and its anchor.
 
+- **Price only the nodes that generate.** Files copied or vendored unchanged cost almost nothing, so subtract them before estimating. Keep a margin on generated work: in 33 of the author's logged fleet runs, the median run used 1.6x its estimate.
+
 - **The first-run cap**, deliberately scoped small. The first run buys information about cost, not the result.
 
 - **Usage-window check.** If your plan has a rolling usage limit and this job is wide, say so before it starts.
@@ -150,7 +156,7 @@ Apply this on every go without being asked.
 3. **Thin orchestrator.** The main session plans, routes, integrates and judges. Bulk reading (files, logs, pages) goes to a scout that returns a compact summary. Worker returns are structured and short. A worker's transcript never enters the main context.
 4. **A single-agent verdict delegates the typing only when it pays.** If the main session runs on an expensive tier, hand the work to one cheaper worker with a full handoff packet (objective, files in scope, out of scope, the verify command, stop conditions). If the main session is already on the cheaper tier, do it in place unless the reading would bloat the transcript. A few edits on context already loaded are always done in place.
 5. **A fan-out runs as a Workflow.** Past the gate, run the spec with the Workflow tool. Invoking this skill is the opt-in, so `go` is enough.
-6. **QA reads an anchor, not an opinion.** Done means the test ran and passed, the file opened and rendered, the number ties to its source, and the last task's definition of done is met. A fresh verifier sees the deliverable and the anchor only, never the worker's reasoning. No anchor → it ships labelled **UNVERIFIED**.
+6. **QA reads an anchor, not an opinion.** Done means the test ran and passed, the file opened and rendered, the number ties to its source, and the last task's definition of done is met. A fresh verifier sees the deliverable and the anchor only, never the worker's reasoning. No anchor → it ships labelled **UNVERIFIED**. **The orchestrator's own writing gets the same check.** The README, close-out claims and any file the main session wrote go through the claim check too; it is easy to verify the workers and wave your own prose through.
 7. **Advisor checkpoints, orchestrator only.** If you use an advisor model, consult it before the spec locks, after the same error hits twice, and before declaring done. Subagents can inherit the advisor, and each call re-reads a whole transcript at the advisor's rates, so every worker prompt says not to consult it unless the spec names that worker. Skip all three checkpoints on a short run.
 8. **Irreversible actions never ride this path.** Send, deploy, publish, install, pay, delete, push, email a customer: workers are read-only or write-scoped agent types, and the main session asks in chat first.
 9. **Every worker prompt opens with the frozen context guard** (rule 6 in `~/.claude/skills/graph/references/budget.md`: no whole reads of big files, skip vendored paths, cap shell output, stop at about 60 tool calls and hand off through `notes`). Paste it as `const GUARD` and put it in front of every worker prompt. No worker prompt softens it.
