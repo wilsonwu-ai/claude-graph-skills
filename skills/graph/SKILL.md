@@ -98,7 +98,23 @@ FROZEN:      <the rules no node may tune, because they are exactly the ones an o
               would weaken to win. Example set: never git stash, never git reset,
               no git command except committing one named file. Yours will differ per job.
               If nothing here can be gamed, write NONE and move on.>
+CAPABILITIES: <per node class: the skills, plugin skills and MCP servers it uses, from
+              Step 3b. Format: `node → skill (path) · skill (path) · mcp:server [on|off]`.
+              "none" is a valid answer. The person approves or edits this line with the plan.>
 ```
+
+## Step 3b: Pick capabilities per node
+
+A large skill library is only useful if each agent gets the right few skills, and loading all of them into every agent wastes tokens. This step decides which skills each node gets for this job only. Nothing is installed or enabled.
+
+1. **Search once per node class, not per item.** Search the library for the node's one-line task. Use a skill router if you have one; otherwise list names and descriptions with `grep -h '^description:' ~/.claude/skills/*/SKILL.md` and the plugin skill folders under `~/.claude/plugins/`. Run the search as a command on its own, so a guard that refuses unknown scripts next to a write does not block it.
+2. **At most 2 skills per node.** Pick by fit to what the node must get right, never by past usage: a library's value is the skills people forgot they own. A node that needs no skill gets `none`, because every skill read costs tokens on every agent in that class.
+3. **Unlock by path, not by install.** Each worker prompt opens with `Read first: <SKILL.md path>, <SKILL.md path>`. This works for subagents, for skills in disabled plugins (the file is still on disk, so read it rather than enable the plugin), and for non-Claude lanes such as Codex or opencode workers.
+4. **Check the lane can run it.** A skill that needs tools only the orchestrating harness has (subagents, workflow scripts, MCP tool names) cannot go to a different harness. Skills that handle private business data stay on the lane the data is allowed to reach.
+5. **MCP servers stay as they are.** Name the server a node needs and whether it is on. An off server stays off unless the person turns it on for this job, because enabling one adds its tools to every session.
+6. **Print the result as the spec's CAPABILITIES line.** The person's edits to it are final.
+
+If the search cannot run (blocked, no index), say so on the CAPABILITIES line and ask the person to name the skills. Do not guess paths.
 
 ## Step 4: The bill, before anyone pays it
 
@@ -152,7 +168,7 @@ Do not spawn. Wait for approval, then run Step 5b.
 Apply this on every go without being asked.
 
 1. **A progress indicator first, if your setup has one.** Create it from the spec's nodes before the first spawn, and move it at every node boundary. It is the running "update me".
-2. **Every spawn names its model and effort.** Tier per Step 4: lookup and extraction → `haiku`/`low`; building and bounded judgment → `sonnet`/`high`; synthesis, architecture, final review → `opus`/`high`.
+2. **Every spawn carries its CAPABILITIES and names its model and effort.** The prompt opens with `Read first:` and the SKILL.md paths approved for that node class in Step 3b, and nothing else from the library. Tier per Step 4: lookup and extraction → `haiku`/`low`; building and bounded judgment → `sonnet`/`high`; synthesis, architecture, final review → `opus`/`high`.
 3. **Thin orchestrator.** The main session plans, routes, integrates and judges. Bulk reading (files, logs, pages) goes to a scout that returns a compact summary. Worker returns are structured and short. A worker's transcript never enters the main context.
 4. **A single-agent verdict delegates the typing only when it pays.** If the main session runs on an expensive tier, hand the work to one cheaper worker with a full handoff packet (objective, files in scope, out of scope, the verify command, stop conditions). If the main session is already on the cheaper tier, do it in place unless the reading would bloat the transcript. A few edits on context already loaded are always done in place.
 5. **A fan-out runs as a Workflow.** Past the gate, run the spec with the Workflow tool. Invoking this skill is the opt-in, so `go` is enough.

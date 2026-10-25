@@ -37,6 +37,7 @@ This prints a plan and stops:
 - the fake edge test
 - a gate that often says "one session is enough"
 - a spec with an anchored verifier
+- the skills each agent gets (at most 2, read by path, nothing installed)
 - the bill
 
 Type `go` to run it.
